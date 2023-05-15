@@ -198,7 +198,7 @@ def main():
                 addindex = line.index(elt)
                 inst = line[addindex]
                 list_add = []
-                
+                #checking flags....
                 i = 1
                 while i < 3:
                     reg_key = line[addindex + i]
