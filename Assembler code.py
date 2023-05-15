@@ -37,6 +37,7 @@ def typeF(inst, op):
 
 
 def main():
+          #taking input from files ....
     with open("file_input.txt") as ip:
         data = ip.readlines()
         ip.close()
@@ -50,6 +51,7 @@ def main():
     E = ['jmp', 'je', 'jgt', 'jlt']
     F = ['hlt']
     M = ['mov']
+
 
 
     l1 = []
