@@ -3,15 +3,17 @@ opcode = {'add': '00000', 'sub': '00001', 'mov_imm': '00010', 'mov_reg':'00011',
           'rs': '01000', 'ls': '01001', 'xor' : '01010', 'or':'01011',
           'and': '01100', 'not': '01101', 'cmp': '01110', 'jmp':'01111',
           'jlt': '11100', 'jgt': '11101', 'je': '11111', 'hlt': '11010'}
+l = ['add', 'sub', 'mov', 'ld', 'st', 'mul', 'div', 'rs', 'ls', 'xor', 'or', 'and', 'not', 'cmp',
+             'jmp', 'jlt', 'jgt', 'je', 'hlt']
+reg = {'R0': '000', 'R1': '001', 'R2': '010', 'R3': '011', 'R4': '100', 'R5': '101', 'R6': '110',
+          'FLAGS': '111'}
+
+
 opcode1 = {'add': 'A', 'sub': 'A', 'mov_imm': 'B', 'mov_reg':'C',
           'ld': 'D', 'st':'D', 'mul':'A', 'div':'C',
           'rs':'B', 'ls':'B','xor': 'A', 'or':'A',
           'and':'A', 'not':'C', 'cmp':'C', 'jmp': 'E',
           'jlt': 'E', 'jgt': 'E', 'je': 'E', 'hlt': 'F'}          
-l = ['add', 'sub', 'mov', 'ld', 'st', 'mul', 'div', 'rs', 'ls', 'xor', 'or', 'and', 'not', 'cmp',
-             'jmp', 'jlt', 'jgt', 'je', 'hlt']
-reg = {'R0': '000', 'R1': '001', 'R2': '010', 'R3': '011', 'R4': '100', 'R5': '101', 'R6': '110',
-          'FLAGS': '111'}
 
 #type functions  .....
 
