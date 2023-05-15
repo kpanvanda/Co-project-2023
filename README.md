@@ -14,6 +14,12 @@ WORKFLOW:
 
 The instruction set architecture is defined using dictionaries that hold the opcodes and instruction types of the supported instructions.
 
+2) The main function reads the input file line by line, identifies the type of instruction and the registers and operands involved, and generates the corresponding machine code using the helper functions.
+
+The code also performs error checking for common mistakes, such as using undefined registers, invalid operands, or multiple labels in the same line. The errors are reported to the user through print statements.
+
+Overall, this code provides a basic implementation of an assembler for a simple assembly language and can be extended to support a larger set of instructions and more complex features.
+
 
 3) This is a code snippet that is part of an assembler program. The purpose of this code is to parse the instructions provided in an assembly language file and generate binary machine code instructions.
 
