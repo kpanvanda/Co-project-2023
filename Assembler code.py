@@ -3,16 +3,13 @@ opcode = {'add': '00000', 'sub': '00001', 'mov_imm': '00010', 'mov_reg':'00011',
           'rs': '01000', 'ls': '01001', 'xor' : '01010', 'or':'01011',
           'and': '01100', 'not': '01101', 'cmp': '01110', 'jmp':'01111',
           'jlt': '11100', 'jgt': '11101', 'je': '11111', 'hlt': '11010'}
-
-inst_type = {'add': 'A', 'sub': 'A', 'mov_imm': 'B', 'mov_reg':'C',
+opcode1 = {'add': 'A', 'sub': 'A', 'mov_imm': 'B', 'mov_reg':'C',
           'ld': 'D', 'st':'D', 'mul':'A', 'div':'C',
           'rs':'B', 'ls':'B','xor': 'A', 'or':'A',
           'and':'A', 'not':'C', 'cmp':'C', 'jmp': 'E',
           'jlt': 'E', 'jgt': 'E', 'je': 'E', 'hlt': 'F'}          
-
 l = ['add', 'sub', 'mov', 'ld', 'st', 'mul', 'div', 'rs', 'ls', 'xor', 'or', 'and', 'not', 'cmp',
              'jmp', 'jlt', 'jgt', 'je', 'hlt']
-
 reg = {'R0': '000', 'R1': '001', 'R2': '010', 'R3': '011', 'R4': '100', 'R5': '101', 'R6': '110',
           'FLAGS': '111'}
 
@@ -20,24 +17,19 @@ reg = {'R0': '000', 'R1': '001', 'R2': '010', 'R3': '011', 'R4': '100', 'R5': '1
 def typeA(inst, reg1, reg2, reg3,op):
     if inst in opcode.keys() and  reg1 in reg.keys() and reg2 in reg.keys():
         if reg3 in reg.keys():
-            op.writelines(str(opcode[inst] + '00' + reg[reg1] + reg[reg2] + reg[reg3] + '\n'))
-
+                    op.writelines(str(opcode[inst] + '00' + reg[reg1] + reg[reg2] + reg[reg3] + '\n'))
 def typeB(inst, reg1, imm, op):
     if inst in opcode.keys() and reg1 in reg.keys():
-        op.writelines(str(opcode[inst]+ reg[reg1] + format(imm, '08b') + '\n'))
-
+            op.writelines(str(opcode[inst]+ reg[reg1] + format(imm, '08b') + '\n'))
 def typeC(inst, reg1, reg2, op):
     if inst in opcode.keys() and reg1 in reg.keys() and reg2 in reg.keys():
         op.writelines(str(opcode[inst] + '00000' + reg[reg1] + reg[reg2] + '\n'))
-
 def typeD(inst, reg1, mem_add, op):
     if inst in opcode.keys() and reg1 in reg.keys():
-        op.writelines(str(opcode[inst] + reg[reg1] + format(mem_add, '08b') + '\n'))
-
+            op.writelines(str(opcode[inst] + reg[reg1] + format(mem_add, '08b') + '\n'))
 def typeE(inst, mem_add, op):
     if inst in opcode.keys():
         op.writelines(str(opcode[inst] + '000' + format(mem_add, '08b') + '\n'))
-
 def typeF(inst, op):
     if inst in opcode.keys():
         op.writelines(str(opcode[inst] + '00000000000' + '\n'))
@@ -102,7 +94,7 @@ def main():
                 if ':' in k:
                     count_label += 1
                     if line[1] == line[-1]:
-                        # sys.stdout.write("Error ", line[-1], ": No Instruction after Label"+'\n')
+                         # sys.stdout.write("Error ", line[-1], ": No Instruction after Label"+'\n')
                         print("Error ", line[-1], ": No Instruction after Label")
                         exit()
                 index += 1
@@ -140,7 +132,6 @@ def main():
                                 exit()
                             list_add.append(line[addindex + i])
                     else:
-                        # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                         print("Error" + line[-1] + ": Register not found")
                         exit()
                     i += 1
@@ -183,18 +174,15 @@ def main():
                     try:
                         imm = int(num)
                         if not 0 <= imm <= 255:
-                            # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                             print("Error " + line[-1] + ": Immediate value out of range")
                             exit()
                     except ValueError:
-                        # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                         print("Error " + line[-1] + ": Invalid syntax")
                         exit()
                 else:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print("Error " + line[-1] + ": Invalid syntax")
-                    exit()            
-        
+                    exit()
+
                 typeB(inst, reg1, imm, op)
                 flag = 1
                 break
@@ -211,12 +199,10 @@ def main():
                     reg_key = line[addindex + i]
                     if reg_key in reg:
                         if reg_key == 'FLAGS':
-                            # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                             print("Error " + line[-1] + ": Illegal use of FLAGS")
                             exit()
                         list_add.append(reg_key)
                     else:
-                        # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                         print("Error " + line[-1] + ": Register not found")
                         exit()
                     i += 1
@@ -225,12 +211,10 @@ def main():
                 if len(list_add) == 2:
                     reg1, reg2 = list_add
                 else:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print("Error" + line[-1] + ": invalid syntax")
                     exit()
 
                 if line[addindex + 3] != line[-1]:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print('General Syntax Error ' + line[-1])
                     exit()
 
@@ -242,12 +226,10 @@ def main():
                 addindex = line.index(elt)
                 inst = line[addindex]
                 if line[addindex + 1] not in reg:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print("Error " + line[-1] + ": register not found")
                     exit()
         
                 if line[addindex + 1] == 'FLAGS':
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print("Error " + line[-1] + ": Illegal use of FLAGS")
                     exit()
         
@@ -255,28 +237,24 @@ def main():
 
                 var = line[addindex + 2]
                 if var in lbl1:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     error_msg = f'Error {line[-1]}: Misuse of label'
                     raise ValueError(error_msg)
                 if var not in v1:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     error_msg = f'Error {line[-1]}: Undefined Variable'
                     raise ValueError(error_msg)
 
                 if line[addindex + 3] != line[-1]:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     error_msg = f'General Syntax Error {line[-1]}'
                     raise ValueError(error_msg)
         
                 flag = 0
                 for k in v1:
                     if k == var:
-                        typeD(inst, reg1, makeVar(l1, var), op)
+                        typeD(inst, reg1, getVar(l1, var), op)
                         flag = 1
                         break
         
                 if flag == 0:
-                    # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                     print('Error ' + line[-1] + ' :Undefined Variable')
                     exit()
 
@@ -285,7 +263,7 @@ def main():
 
                 while i < len(v1):
                     if v1[i] == var:
-                        typeD(inst, reg1, makeVar(l1, var), op)
+                        typeD(inst, reg1, getVar(l1, var), op)
                         flag = 1
                         break
                     i += 1    
@@ -310,7 +288,7 @@ def main():
                 flag = 0
                 while i < len(l1):
                     if lab in l1[i]:
-                        typeE(inst, makeLbl(l1, l1[i]), op)
+                        typeE(inst, getLbl(l1, l1[i]), op)
                         flag = 1
                         break
                     i += 1
@@ -385,7 +363,6 @@ def main():
             if ':' in k:
                 for elt in opcode.keys():
                     if elt + ":" == k:
-                        # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                         print("Error: Cannot use instructions as label names")
                         exit()
                 lbl1.append(k)
@@ -398,7 +375,6 @@ def main():
             if ':' in k:
                 for elt in opcode.keys():
                     if elt + ":" == k:
-                        # sys.stdout.write("Error ", line[-1], ": Multiple Labels Used in the Same Line"+'\n')
                         print("Error: Cannot use instructions as label names")
                         exit()
                 lbl1.append(k)
@@ -410,7 +386,7 @@ def main():
             exit()
             
 
-def makeVar(a, x):
+def getVar(a, x):
     b = {}
     c = [i for i in a if 'var' not in i]
     d = [i for i in a if 'var' in i]
@@ -422,10 +398,11 @@ def makeVar(a, x):
         n1 += 1
     return b[x]
 
-def makeLbl(a, lb):
+def getLbl(a, lb):
     lblDict = {i: lst.index(i) for i in lst if ':' in i}
     return lblDict[lb]
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     main()
+
