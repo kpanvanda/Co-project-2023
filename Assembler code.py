@@ -40,11 +40,11 @@ def typeF(inst, op):
 
 def main():
           #taking input from files ....
-    with open("file_input.txt") as ip:
+    with open("stdin.txt") as ip:
         data = ip.readlines()
         ip.close()
     
-    op = open("file_output.txt","w")
+    op = open("stdout.txt","w")
 
     A = ['add', 'sub', 'mul', 'xor', 'or', 'and']
     B = ['ls', 'rs']
