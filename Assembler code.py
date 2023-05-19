@@ -30,7 +30,7 @@ def typeC(inst, reg1, reg2):
 def typeD(inst, reg1, mem_add):
     if inst in opcode.keys() and reg1 in reg.keys():
             #op.writelines(str(opcode[inst] + reg[reg1] + format(mem_add, '08b') + '\n'))
-            print(str(opcode[inst] +"0" + reg[reg1] + format(mem_add, '07b') ))
+            print(str(opcode[inst] + reg[reg1] + format(mem_add, '07b') ))
 def typeE(inst, mem_add):
     if inst in opcode.keys():
         #op.writelines(str(opcode[inst] + '000' + format(mem_add, '08b') + '\n'))
