@@ -22,7 +22,7 @@ def typeA(inst, reg1, reg2, reg3):
 def typeB(inst, reg1, imm):
     if inst in opcode.keys() and reg1 in reg.keys():
             #op.writelines(str(opcode[inst]+ reg[reg1] + format(imm, '08b') + '\n'))
-            print(str(opcode[inst]+ reg[reg1] + format(imm, '08b') ))
+            print(str(opcode[inst]+ "0" + reg[reg1] + format(imm, '07b') ))
 def typeC(inst, reg1, reg2):
     if inst in opcode.keys() and reg1 in reg.keys() and reg2 in reg.keys():
         #op.writelines(str(opcode[inst] + '00000' + reg[reg1] + reg[reg2] + '\n'))
@@ -30,11 +30,11 @@ def typeC(inst, reg1, reg2):
 def typeD(inst, reg1, mem_add):
     if inst in opcode.keys() and reg1 in reg.keys():
             #op.writelines(str(opcode[inst] + reg[reg1] + format(mem_add, '08b') + '\n'))
-            print(str(opcode[inst] + reg[reg1] + format(mem_add, '08b') ))
+            print(str(opcode[inst] +"0" + reg[reg1] + format(mem_add, '07b') ))
 def typeE(inst, mem_add):
     if inst in opcode.keys():
         #op.writelines(str(opcode[inst] + '000' + format(mem_add, '08b') + '\n'))
-        print(str(opcode[inst] + '000' + format(mem_add, '08b') ))
+        print(str(opcode[inst] + '000' + format(mem_add, '07b') ))
 def typeF(inst):
     if inst in opcode.keys():
         #op.writelines(str(opcode[inst] + '00000000000' + '\n'))
